@@ -10,7 +10,7 @@ import (
 	"github.com/diwasrimal/bullet/pkg/handshake"
 )
 
-var serverUrl = "localhost:4030"
+var serverUrl = "localhost:3030"
 
 func printUsage() {
 	fmt.Printf("Usage: %s {send|recv} {<filepath>|<peer_id>}\n\n", os.Args[0])
