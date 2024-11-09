@@ -96,42 +96,7 @@ func handleClient(client Client) {
 		sendersMu.Unlock()
 	}
 
-	// if true {
-	// 	buf := make([]byte, 2048)
-	// 	for {
-	// 		n, err := client.conn.Read(buf)
-	// 		if err != nil {
-	// 			if err == io.EOF {
-	// 				log.Printf("Received EOF, breaking read loop")
-	// 				break
-	// 			}
-	// 			log.Printf("%T reading from %v: %v\n", err, client.id, err)
-	// 			continue
-	// 		}
-	// 		// data := buf[:n]
-	// 		log.Printf("Read %v bytes from %v\n", n, client.id)
-	// 	}
-	// }
 }
-
-// func getHandshakeReqType(conn net.Conn) (byte, error) {
-// 	buf := make([]byte, 1)
-// 	_, err := conn.Read(buf)
-// 	if err != nil {
-// 		return 255, err
-// 	}
-// 	handshakeType := buf[0]
-// 	if handshakeType != HandshakeSend && handshakeType != HandshakeRecv {
-// 		return 255, fmt.Errorf("unrecognized handshake request type, code=%d", handshakeType)
-// 	}
-
-// 	// Handshake was valid
-// 	_, err = conn.Write([]byte{HandshakeOK})
-// 	if err != nil {
-// 		return 255, err
-// 	}
-// 	return handshakeType, nil
-// }
 
 func randId() string {
 	const randchars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
