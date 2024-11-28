@@ -1,5 +1,4 @@
-bullet
-bullet-server
-*.webm
-todo.txt
-tmp*
+/bullet
+/bullet-server
+/todo.txt
+/tmp*

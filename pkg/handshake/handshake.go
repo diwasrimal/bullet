@@ -53,27 +53,3 @@ func Complete(src net.Conn) (shakeType HandshakeType, err error) {
 
 	return
 }
-
-// func performSendHandshake(conn net.Conn) error {
-
-// }
-
-// func performRecvHandshake(conn net.Conn) error {
-// 	_, err := conn.Write([]byte{HandshakeRecv})
-
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	resp := make([]byte, 1)
-// 	_, err = conn.Read(resp)
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	if resp[0] == HandshakeOK {
-// 		return nil
-// 	} else {
-// 		return fmt.Errorf("handshake not ok")
-// 	}
-// }

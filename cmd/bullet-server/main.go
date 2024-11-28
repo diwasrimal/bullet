@@ -1,14 +1,15 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"io"
 	"log"
-	"math/rand"
 	"net"
 	"sync"
-	"time"
 
 	"github.com/diwasrimal/bullet/pkg/handshake"
+	"github.com/diwasrimal/bullet/pkg/utils"
 )
 
 type Client struct {
@@ -20,9 +21,13 @@ type Client struct {
 var senders = make(map[string]Client)
 var sendersMu sync.Mutex
 
-const address = ":3030"
+var port int
 
 func main() {
+	flag.IntVar(&port, "p", 3030, "Server port")
+	flag.Parse()
+
+	address := fmt.Sprintf("0.0.0.0:%d", port)
 	ln, err := net.Listen("tcp", address)
 	if err != nil {
 		panic(err)
@@ -37,7 +42,7 @@ func main() {
 		}
 		client := Client{
 			conn:           conn,
-			id:             randId(),
+			id:             utils.RandCode(),
 			streamingEnded: make(chan struct{}),
 		}
 		go handleClient(client)
@@ -96,39 +101,4 @@ func handleClient(client Client) {
 		sendersMu.Unlock()
 	}
 
-}
-
-func randId() string {
-	const randchars = "1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
-	buf := make([]byte, 8)
-	for i := range len(buf) {
-		buf[i] = randchars[rand.Intn(len(randchars))]
-	}
-	return string(buf)
-}
-
-func dummyClient() {
-	time.Sleep(2 * time.Second)
-	log.Println("client: sending some request")
-	conn, err := net.Dial("tcp", address)
-	if err != nil {
-		log.Printf("client: %T dialing: %v\n", err, err)
-		return
-	}
-
-	connIdBuf := make([]byte, 20)
-	n, err := conn.Read(connIdBuf)
-	connId := connIdBuf[:n]
-	log.Printf("client: receive file at link %s/files/%s\n", address, connId)
-
-	data := make([]byte, 2500)
-	for i := range len(data) {
-		data[i] = byte(rand.Intn(255))
-	}
-	n, err = conn.Write(data)
-	if err != nil {
-		log.Printf("client: %T writing: %v\n", err, err)
-		return
-	}
-	log.Printf("client: wrote %v bytes...\n", n)
 }
