@@ -28,13 +28,13 @@ $
 
 And receiving somewhere else
 ```console
-$ ./bullet/bullet recv df6YOFss
+$ ./bullet recv df6YOFss
 Detected sender's file: "large-video.mp4" (104.9MB)
 Received 104857600 bytes of data at "large-video.mp4".
 $
 ```
 
-You can specify the filename for receiving. Use `-o -` to recieve directly to stdout
+You can specify the filename for receiving. Use `-o -` to receive directly to stdout
 ```console
 $ ./bullet recv -o myvideo.mp4 mXmDFGvu
 Detected sender's file: "large-video.mp4" (104.9MB)
@@ -43,8 +43,9 @@ $
 ```
 
 Share file with your own share code
+
 ```console
-$./bullet send -code from-diwas hello.mp4
+$ ./bullet send -code from-diwas hello.mp4
 Share code: from-diwas
 Sending "hello.mp4" (104.9MB), waiting for receiver...
 Sent 104857600 bytes of data!
