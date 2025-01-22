@@ -10,3 +10,9 @@ func RandCode() string {
 	}
 	return string(buf)
 }
+
+func Assert(condition bool, msg string) {
+	if !condition {
+		panic(msg)
+	}
+}
