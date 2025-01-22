@@ -101,7 +101,7 @@ func send(opts sendCmdOpts) {
 		return
 	}
 	if sent != fileInfo.Size() {
-		eprintf("Couldn't sent whole file, sent (%d/%d) bytes\n", sent, fileInfo.Size())
+		eprintf("Couldn't send whole file, sent (%d/%d) bytes\n", sent, fileInfo.Size())
 		return
 	}
 	eprintf("Sent %d bytes of data!\n", sent)
